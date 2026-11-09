@@ -1,6 +1,18 @@
 class Timesheet {
+  constructor() {
+    this.timesheets = new Map();
+  }
+
   submitTimesheet(projectName, hours) {
-    return typeof projectName === 'string' && projectName.trim() !== '' && Number.isFinite(hours) && hours > 0;
+    const isValid = typeof projectName === 'string' && projectName.trim() !== '' && Number.isFinite(hours) && hours > 0;
+    if (isValid) {
+      this.timesheets.set(projectName, hours);
+    }
+    return isValid;
+  }
+
+  getTimesheets() {
+    return Array.from(this.timesheets);
   }
 }
 
